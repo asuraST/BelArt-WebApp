@@ -1,0 +1,21 @@
+<%- include('../partials/header.ejs') %>
+<ul class="list-group list-group-flush">
+    <% if(categories.length){ %>
+        <% categories.forEach(categories => { %>
+            <li class="list-group-item" ><br><%= categories %></li> 
+                <% if(arts.length){ %>
+                    <% arts.forEach(art => { 
+                        if (art.artstyle === categories) { %>
+                            <li class="list-group-item" >
+                                <a href="/trades/<%= art._id %>"><%= art.name %></a>
+                            </li>
+                            <% } });
+                            } else { %>
+                            <p>There are no connections to display.</p>
+                    <% } %>
+            <% }); %>
+        <% } else { %>
+            <p>There are no categories to display.</p>
+        <% } %> 
+</ul>
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,40 @@
+<%- include('../partials/header.ejs') %>
+<div class="grid_main_offer">
+    <h1>
+        Welcome to Bel:Art!
+    </h1>
+    <% if(r){ %>
+        <div class="grid-container-offer">
+
+            <div class="grid-item">
+                <img src="<%=result.tradeid.image %>" alt="tradeid" height="150" width="120"><br>
+                <%= result.tradeid.name%></div>
+            <div class="grid-item">
+                <img src="<%=result.offerid.image %>" alt="offerid" height="150" width="120"><br>
+                <%= result.offerid.name%></div>
+            <div class="grid-item-offer">
+                <form>
+                    <button type="submit"  class="button5" formmethod="POST" formaction="/trades/<%= result.tradeid.id%>/offercancel">Cancel offer</button>
+                    <button type="submit"  class="button5" formmethod="GET" formaction="/users/profile">Go Back</button>
+                </form>
+            </div>
+        </div>
+    <% } else {%>
+        <div class="grid-container-offer">
+            <div class="grid-item">
+                <img src="<%=result.tradeid.image %>" alt="tradeid" height="150" width="120"><br>
+                <%= result.tradeid.name%></div>
+            <div class="grid-item">
+                <img src="<%=result.offerid.image %>" alt="offerid" height="150" width="120"><br>
+                <%= result.offerid.name%></div>
+
+            <div class="grid-item-offer">
+                <form>
+                    <button type="submit"class="button5" formmethod="POST" formaction="/trades/<%= result.tradeid.id%>/acceptOffer">Accept</button>
+                    <button type="submit" class="button5" formmethod="POST" formaction="/trades/<%= result.tradeid.id%>/rejectOffer">Reject</button>
+                </form>
+            </div>
+        </div>
+    <% } %>
+</div>
+<%- include('../partials/footer.ejs') %>

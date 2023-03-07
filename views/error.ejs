@@ -1,0 +1,18 @@
+<%- include('./partials/header.ejs') %>
+
+<div class = "main">
+    <% if(error.status == '404'){ %>
+        <p><%= error.message %></p> 
+        <a href="/trades"><p> << GO BACK TO TRADES</p></a>
+    <% } else {%>
+        <% if(error.status == '429'){ %>
+            <p><%= error.message %></p> 
+            <a href="/"><p> << GO BACK HOME</p></a> 
+        <% } else { %>
+            <h3><%= error.status %> Error</h3>
+            <p><%= error.message %></p>
+        <% } %>
+    <% } %>
+</div>
+
+<%- include('./partials/footer.ejs') %>

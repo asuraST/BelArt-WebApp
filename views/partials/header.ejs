@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>
+    BelArt - Discover beautiful Art
+</title>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+<link rel="stylesheet" href= "/css/style.css">
+</head>
+<body >
+<div class="header">
+  <a href="/" class="logo">
+    <img src= "/images/favicon.ico" alt="ASura_logo" height="40" width="50">
+    <img src= "/images/logo.JPG" alt="ASura_logo" height="50" width="120">
+  </a>
+  <div class="header-right">
+    <a href="/trades/new" class="button">Start Trading</a>
+    <% if(!user){ %>
+      <a href="/users/login" class="a-header">Login |</a>
+      &nbsp;
+      <a href="/users/new" class="a-header">Sign Up</a>
+      &nbsp;
+      <% } else{ %>
+        &nbsp;
+        <a href="/users/profile" class="a-header" >Profile |</a>
+        &nbsp;
+        <a href="/users/logout" class="a-header" >Logout</a>
+        <% } %>
+  </div>
+
+</div>
+
+    <div class="container-fluid">
+        <a href="/">Home</a> &nbsp; &nbsp;
+        <a href="/trades">Trades</a>  &nbsp; &nbsp;
+        <a href="/about">About</a>  &nbsp;&nbsp;
+        <a href="/contact">Contact Us</a>
+    </div>
+
+<% if(errorMessages.length > 0) { %>
+  <% errorMessages.forEach(message => { %>
+    <div class="error">
+      <%=message%>
+    </div>
+    <% }); %>
+    <%}%>
+
+<% if(successMessages.length > 0){ %>
+  <% successMessages.forEach(message => { %>
+    <div class="success">
+      <%=message%>
+    </div>
+  <%});%>
+<%}%>

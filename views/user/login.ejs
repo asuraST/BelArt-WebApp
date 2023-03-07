@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="form-center">
+  <h3> Welcome Back</h3>
+  <p> Don't miss your next opportunity. Sign in to stay updated on your trades.</p>
+
+    <form class="form-horizontal align-items-center" action="/users/login" method ="Post">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Email Address: </label>
+            <div class="col-sm-5">
+              <input type="email" id="email" class="form-control" name="email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2">Password:</label>
+            <div class="col-sm-5">
+              <input type="password" class="form-control" name="password" minlength="8" maxlength="64" required>
+            </div>
+          </div>
+          <br>
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="button3" >Login</button>
+            </div>
+    </form>
+
+</div>
+<%- include('../partials/footer.ejs') %>

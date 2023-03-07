@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs') %>
+<div class="grid_main">
+    <p>
+        Welcome to Bel:Art, <%=user.firstName%>
+    <p>
+    <h3>
+        Your trades
+    </h3>
+
+    <% if(arts.length){ %>
+        <div class="grid-container">
+            <div class="grid-item"></div>
+            <div class="grid-item">Art</div>
+            <div class="grid-item">Category</div>
+            <div class="grid-item">Status</div>
+            <% arts.forEach(art => { %>
+                <div class="grid-item"> <input class="form-check-input" type="radio" name="item" id="item" value="<%= art.id %>"></div>
+                <div class="grid-item"><%= art.name %></a></div>
+                <div class="grid-item"><%= art.artstyle %></div>
+                <div class="grid-item"><%= art.status %></div>
+                <form>
+                    <% if(art.status === 'available'){ %>
+                        <button type="submit" formmethod="POST" class="button4" formaction="/trades/<%=omid %>/tradeoffered">Trade it</button>
+                    <% } %>
+                </form>
+            <% }); %>
+        </div>    
+    <% } else { %>
+        <p>There are no arts to trade</p>
+    <% } %>
+</div>
+<%- include('../partials/footer.ejs') %>

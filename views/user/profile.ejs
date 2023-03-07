@@ -1,0 +1,90 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="grid_main">
+    <p>
+        Welcome to Bel:Art, <%=user.firstName%>
+    <p>
+    <h3>
+        Your trades
+    </h3>
+    <% if(arts.length){ %>
+        <div class="grid-container">
+            <div class="grid-item">Art</div>
+            <div class="grid-item">Category</div>
+            <div class="grid-item">Status</div>
+            <div class="grid-item">Action</div>
+            <% arts.forEach(art => { %>
+                <div class="grid-item"><a href="/trades/<%= art.id%>"><%= art.name %></a></div>
+                <div class="grid-item"><%= art.artstyle %></div>
+                <div class="grid-item"><%= art.status %></div>
+                <div class="grid-item">
+                    <form>
+                        <button type="submit" class="button4" formmethod="GET" formaction="/trades/<%= art._id%>/edit">Edit</button>
+                        <button type="submit" class="button4" formmethod="POST" formaction="/trades/<%= art._id %>?_method=DELETE">Delete</button>
+                        <% if(art.status != 'available' && art.status != 'traded'){ %>
+                            <button type="submit" class="button4" formmethod="POST" formaction="/trades/<%= art._id%>/manageOffer">Manage Offer</button>
+                        <% } %>
+                    </form>
+                </div>
+            <% }); %>
+        </div> 
+    <% } else { %>
+        <p>There are no arts to display.</p>
+    <% } %>
+</div>
+    
+    <div class="grid_main">
+        <h3>
+            Your watched trades
+        </h3>
+        <% if(warts.length){ %>
+        <div class="grid-container">
+            <div class="grid-item">Art</div>
+            <div class="grid-item">Category</div>
+            <div class="grid-item">Status</div>
+            <div class="grid-item">Action</div>
+            <% warts.forEach(wtrade =>{ %>
+                <% wtrade.mnames.forEach(r=> {%>
+                    <div class="grid-item"><a href="/trades/<%= r.id%>"><%= r.name %></a></div>
+                    <div class="grid-item"><%= r.artstyle %></div>
+                    <div class="grid-item"><%= r.status %></div>
+                    <div class="grid-item">
+                        <form>
+                            <button type="submit" class="button4" formmethod="POST" formaction="/trades/<%= r.id%>/notinterested">Not interested</button>
+                        </form>
+                    </div>
+                <% }); %>
+            <% }); %>     
+        </div>
+        <% } else { %>
+                <p>There are no arts in the watchlist.</p>  
+        <% } %>
+    </div>
+    
+    <div class="grid_main">
+        <h3>
+            Your Offers
+        </h3>
+        <% if(oarts.length){ %>
+        <div class="grid-container">
+            <div class="grid-item">Art</div>
+            <div class="grid-item">Category</div>
+            <div class="grid-item">Status</div>
+            <div class="grid-item">Action</div>
+            <% oarts.forEach(oart =>{ %>
+                <div class="grid-item"><a href="/trades/<%= oart.tradeid.id%>"><%= oart.tradeid.name %></a></div>
+                <div class="grid-item"><%= oart.tradeid.artstyle %></div>
+                <div class="grid-item"><%= oart.tradeid.status %></div>
+                <div class="grid-item">
+                    <form>
+                        <button type="submit" class="button4" formmethod="POST" formaction="/trades/<%= oart.tradeid.id%>/offercancel">Cancel offer</button>  
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+        <% } else { %>
+        <p>There are no arts in offer.</p>
+        <% } %>
+    </div>
+
+<%- include('../partials/footer.ejs')%>

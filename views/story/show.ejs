@@ -1,0 +1,40 @@
+<%- include('../partials/header.ejs')%>
+<div class="row">
+    <div class="column"> 
+        <img src="<%=art.image %>" alt="show_image" class="show-img" height = "400"  width="300" >
+    </div>
+    
+    <div class="column">
+        <h2><%= art.name %></h2>
+        <small>Posted <%=art.createAt %>  by <%= art.owner.firstName + ' ' + art.owner.lastName %></small>
+        <div id="details"><u><br>About the work</u><i><br> <%= art.details %></i></div><br>
+        <div id="artstyle">Art Category: <%= art.artstyle%></div>
+        <div id="artist">Artist: <%= art.artist%></div>
+        <div id="createdon">Created on:<%= art.createdon%></div>
+       
+    </div>
+
+    <div class="column1"> 
+        <form>
+            <% if(user == art.owner._id){%>
+                <button type="submit"  class ="button2" formmethod="GET" formaction="/trades/<%= art._id %>/edit">Edit</button>
+                <button type="submit"  class ="button2" formmethod="POST" formaction="/trades/<%= art._id %>?_method=DELETE">Delete</button>
+            <% } %>
+            <% if(user != art.owner._id){ %>
+            <p><i>Are you interested in this art? </i><br>
+                <br>
+                <% if(art.status === "available"){ %>
+                    <button type="submit"  class ="button2" formmethod="POST" formaction="/trades/<%= art._id %>/tradeitem">Trade it</button>
+                    <% } %>   
+                    <% if(!w){ %>
+                    <button type="submit"  class ="button2" formmethod="POST" formaction="/trades/<%= art._id %>/interested">Interested</button>
+                    <% } else {%>
+                    <button type="submit"  class ="button2" formmethod="POST" formaction="/trades/<%= art._id %>/notinterested">Not interested</button>
+                    <%} %>         
+            </p> <% } %>
+        </form>
+    </div>
+
+</div>
+
+<%- include('../partials/footer.ejs')%>
